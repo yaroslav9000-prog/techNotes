@@ -14,13 +14,13 @@ const logEvents = async (message: string ,logFileName: string) =>{
         }
         fsPromises.appendFile(path.join(__dirname, "../", "logs", logFileName),logItem)
     }catch(err){
-        console.error(err);
+        console.log(err);
     }
 }
 
 const logger = async (req: Request, res: Response, next: NextFunction)=>{
     try{
-        logEvents(`${req.url}, ${req.method}, ${req.originalUrl}`, "logs.txt");
+        logEvents(`${req.url}, ${req.method}, ${req.url}, ${req.headers.origin}`, "logs.txt");
         console.log(`${req.method} request was logged`);
     }catch(err){
         console.error(err);
